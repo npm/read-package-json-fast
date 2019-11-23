@@ -32,6 +32,8 @@ path originally passed into the function.
 - Handle `true`, `false`, or object values passed to `bundleDependencies`
 - Normalize `funding: <string>` to `funding: { url: <string> }`
 - Remove any `scripts` members that are not a string value.
+- Normalize a string `bin` member to `{ [name]: bin }`.
+- Fold `optionalDependencies` into `dependencies`.
 
 ## WHAT THIS MODULE DOES NOT DO
 

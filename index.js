@@ -5,6 +5,7 @@ const parse = require('json-parse-even-better-errors')
 const rpj = path => readFile(path, 'utf8')
   .then(data => parse(data))
   .then(fixBundled)
+  .then(foldinOptionalDeps)
   .then(fixScripts)
   .then(fixFunding)
   .then(fixBin)
@@ -12,6 +13,17 @@ const rpj = path => readFile(path, 'utf8')
     er.path = path
     throw er
   })
+
+const foldinOptionalDeps = data => {
+  const od = data.optionalDependencies
+  if (od && typeof od === 'object') {
+    data.dependencies = data.dependencies || {}
+    for (const [name, spec] of Object.entries(od)) {
+      data.dependencies[name] = spec
+    }
+  }
+  return data
+}
 
 const fixBin = data => {
   if (typeof data.bin === 'string') {
