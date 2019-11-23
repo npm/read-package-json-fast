@@ -17,6 +17,11 @@ t.test('clean up bundleddddddDependencies', async t => {
       'package.json': JSON.stringify({ bundledDependencies: [] }),
     }) + '/package.json'), { bundleDependencies: [] }))
 
+  t.test('dont array-ify if its an array already', t =>
+    t.resolveMatch(rpj(t.testdir({
+      'package.json': JSON.stringify({ bundleDependencies: ['a'] }),
+    }) + '/package.json'), { bundleDependencies: ['a'] }))
+
   t.test('handle bundledDependencies: true', t =>
     t.resolveMatch(rpj(t.testdir({
       'package.json': JSON.stringify({

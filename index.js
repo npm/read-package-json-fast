@@ -38,8 +38,14 @@ const fixBundled = data => {
     data.bundleDependencies = []
   else if (bd === true)
     data.bundleDependencies = Object.keys(data.dependencies || {})
-  else if (bd && typeof bd === 'object')
-    data.bundleDependencies = Object.keys(bd)
+  else if (bd && typeof bd === 'object') {
+    if (!Array.isArray(bd))
+      data.bundleDependencies = Object.keys(bd)
+    else
+      data.bundleDependencies = bd
+  } else
+    delete data.bundleDependencies
+
   delete data.bundledDependencies
   return data
 }
