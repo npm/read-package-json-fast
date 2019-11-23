@@ -4,6 +4,7 @@ const readFile = promisify(fs.readFile)
 const parse = require('json-parse-even-better-errors')
 const rpj = path => readFile(path, 'utf8')
   .then(data => parse(data))
+  .then(add_id)
   .then(fixBundled)
   .then(foldinOptionalDeps)
   .then(fixScripts)
@@ -13,6 +14,12 @@ const rpj = path => readFile(path, 'utf8')
     er.path = path
     throw er
   })
+
+const add_id = data => {
+  if (data.name && data.version)
+    data._id = `${data.name}@${data.version}`
+  return data
+}
 
 const foldinOptionalDeps = data => {
   const od = data.optionalDependencies

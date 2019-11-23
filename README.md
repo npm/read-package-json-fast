@@ -34,6 +34,8 @@ path originally passed into the function.
 - Remove any `scripts` members that are not a string value.
 - Normalize a string `bin` member to `{ [name]: bin }`.
 - Fold `optionalDependencies` into `dependencies`.
+- Set the `_id` property if name and version are set.  (This is
+  load-bearing in a few places within the npm CLI.)
 
 ## WHAT THIS MODULE DOES NOT DO
 

@@ -156,3 +156,8 @@ t.test('fold in optional deps to regular deps', async t => {
       }
     }))
 })
+
+t.test('set _id if name and version set', t =>
+  t.resolveMatch(rpj(t.testdir({
+    'package.json': JSON.stringify({name:'a', version: '1.2.3'}),
+  }) + '/package.json'), { _id: 'a@1.2.3' }))
