@@ -1,6 +1,6 @@
 {
   "name": "read-package-json-fast",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Like read-package-json, but faster",
   "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
   "license": "ISC",
