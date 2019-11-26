@@ -16,6 +16,9 @@ const rpj = require('read-package-json-fast')
 rpj('/path/to/package.json')
   .then(data => ...)
   .catch(er => ...)
+
+// or just normalize a package manifest
+const normalized = rpj.normalize(packageJsonObject)
 ```
 
 Errors raised from parsing will use
@@ -39,13 +42,13 @@ path originally passed into the function.
 
 ## WHAT THIS MODULE DOES NOT DO
 
-- Warn about invalid/missing name, version, repository, etc.  Extract a
-- description from the `README.md` file, or attach the readme to
+- Warn about invalid/missing name, version, repository, etc.
+- Extract a description from the `README.md` file, or attach the readme to
   the parsed data object.
-- Read the `HEAD` value out of the `.git` folder.  Warn about potentially
-- typo'ed scripts (eg, `tset` instead of `test`) Check to make sure that
-- all the files in the `files` field exist and are
+- Read the `HEAD` value out of the `.git` folder.
+- Warn about potentially typo'ed scripts (eg, `tset` instead of `test`)
+- Check to make sure that all the files in the `files` field exist and are
   valid files.
-- Fix bundleDependencies that are not listed in `dependencies`.  Fix
-- `dependencies` fields that are not strictly objects of string values.
-- Anything involving the `directories` field (ie, bins, mans, and so on)
+- Fix bundleDependencies that are not listed in `dependencies`.
+- Fix `dependencies` fields that are not strictly objects of string values.
+- Anything involving the `directories` field (ie, bins, mans, and so on).

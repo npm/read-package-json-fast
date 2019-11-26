@@ -3,17 +3,23 @@ const fs = require('fs')
 const readFile = promisify(fs.readFile)
 const parse = require('json-parse-even-better-errors')
 const rpj = path => readFile(path, 'utf8')
-  .then(data => parse(data))
-  .then(add_id)
-  .then(fixBundled)
-  .then(foldinOptionalDeps)
-  .then(fixScripts)
-  .then(fixFunding)
-  .then(fixBin)
+  .then(data => normalize(parse(data)))
   .catch(er => {
     er.path = path
     throw er
   })
+
+const normalize = data => {
+  add_id(data)
+  fixBundled(data)
+  foldinOptionalDeps(data)
+  fixScripts(data)
+  fixFunding(data)
+  fixBin(data)
+  return data
+}
+
+rpj.normalize = normalize
 
 const add_id = data => {
   if (data.name && data.version)
