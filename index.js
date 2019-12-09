@@ -8,6 +8,7 @@ const rpj = path => readFile(path, 'utf8')
     er.path = path
     throw er
   })
+const normalizePackageBin = require('npm-normalize-package-bin')
 
 const normalize = data => {
   add_id(data)
@@ -15,7 +16,7 @@ const normalize = data => {
   foldinOptionalDeps(data)
   fixScripts(data)
   fixFunding(data)
-  fixBin(data)
+  normalizePackageBin(data)
   return data
 }
 
@@ -35,22 +36,6 @@ const foldinOptionalDeps = data => {
       data.dependencies[name] = spec
     }
   }
-  return data
-}
-
-const fixBin = data => {
-  if (typeof data.bin === 'string') {
-    if (data.name)
-      data.bin = { [data.name]: data.bin }
-    else
-      delete data.bin
-  } else if (typeof data.bin !== 'object' || !data.bin)
-    delete data.bin
-  else
-    for (const [name, bin] of Object.entries(data.bin)) {
-      if (typeof bin !== 'string')
-        delete data.bin[name]
-    }
   return data
 }
 
