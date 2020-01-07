@@ -11,6 +11,10 @@
     "postversion": "npm publish",
     "postpublish": "git push origin --follow-tags"
   },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:npm/read-package-json-fast.git"
+  },
   "tap": {
     "check-coverage": true
   },
