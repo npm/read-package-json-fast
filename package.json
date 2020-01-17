@@ -20,5 +20,9 @@
   "dependencies": {
     "json-parse-even-better-errors": "^2.0.1",
     "npm-normalize-package-bin": "^1.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/npm/read-package-json-fast.git"
   }
 }
