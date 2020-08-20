@@ -167,35 +167,98 @@ t.test('exports the normalize function', async t =>
     { bundleDependencies: ['a'], dependencies: {a:'1'}}))
 
 t.test('preserve indentation', async t => {
+  const obj = {
+    name: 'object',
+    version: '1.2.3',
+  }
   const path = t.testdir({
     none: {
-      'package.json': JSON.stringify({
-        name: 'none',
-        version: '0.0.0',
-      }),
+      'package.json': JSON.stringify(obj),
     },
     twospace: {
-      'package.json': JSON.stringify({
-        name: 'twospace',
-        version: '2.2.2',
-      }, null, 2),
+      'package.json': JSON.stringify(obj, null, 2),
     },
     tab: {
-      'package.json': JSON.stringify({
-        name: 'tab',
-        version: '8.8.8',
-      }, null, '\t'),
+      'package.json': JSON.stringify(obj, null, '\t'),
     },
     weird: {
-      'package.json': JSON.stringify({
-        name: 'weird',
-        version: '1.2.3',
-      }, null, ' \t \t '),
+      'package.json': JSON.stringify(obj, null, ' \t \t '),
+    },
+    winEol: {
+      none: {
+        'package.json': JSON.stringify(obj).replace(/\n/g, '\r\n'),
+      },
+      twospace: {
+        'package.json': JSON.stringify(obj, null, 2).replace(/\n/g, '\r\n'),
+      },
+      tab: {
+        'package.json': JSON.stringify(obj, null, '\t').replace(/\n/g, '\r\n'),
+      },
+      weird: {
+        'package.json': JSON.stringify(obj, null, ' \t \t ').replace(/\n/g, '\r\n'),
+      },
+    },
+    doubleSpaced: {
+      none: {
+        'package.json': JSON.stringify(obj).replace(/\n/g, '\n\n'),
+      },
+      twospace: {
+        'package.json': JSON.stringify(obj, null, 2).replace(/\n/g, '\n\n'),
+      },
+      tab: {
+        'package.json': JSON.stringify(obj, null, '\t').replace(/\n/g, '\n\n'),
+      },
+      weird: {
+        'package.json': JSON.stringify(obj, null, ' \t \t ').replace(/\n/g, '\n\n'),
+      },
+    },
+    doubleWin: {
+      none: {
+        'package.json': JSON.stringify(obj).replace(/\n/g, '\r\n\r\n'),
+      },
+      twospace: {
+        'package.json': JSON.stringify(obj, null, 2).replace(/\n/g, '\r\n\r\n'),
+      },
+      tab: {
+        'package.json': JSON.stringify(obj, null, '\t').replace(/\n/g, '\r\n\r\n'),
+      },
+      weird: {
+        'package.json': JSON.stringify(obj, null, ' \t \t ').replace(/\n/g, '\r\n\r\n'),
+      },
     },
   })
   const i = Symbol.for('indent')
+  const n = Symbol.for('newline')
   t.equal((await rpj(`${path}/none/package.json`))[i], '')
+  t.equal((await rpj(`${path}/none/package.json`))[n], '')
   t.equal((await rpj(`${path}/twospace/package.json`))[i], '  ')
+  t.equal((await rpj(`${path}/twospace/package.json`))[n], '\n')
   t.equal((await rpj(`${path}/tab/package.json`))[i], '\t')
+  t.equal((await rpj(`${path}/tab/package.json`))[n], '\n')
   t.equal((await rpj(`${path}/weird/package.json`))[i], ' \t \t ')
+  t.equal((await rpj(`${path}/weird/package.json`))[n], '\n')
+  t.equal((await rpj(`${path}/wineol/none/package.json`))[i], '')
+  t.equal((await rpj(`${path}/wineol/none/package.json`))[n], '')
+  t.equal((await rpj(`${path}/wineol/twospace/package.json`))[i], '  ')
+  t.equal((await rpj(`${path}/wineol/twospace/package.json`))[n], '\r\n')
+  t.equal((await rpj(`${path}/wineol/tab/package.json`))[i], '\t')
+  t.equal((await rpj(`${path}/wineol/tab/package.json`))[n], '\r\n')
+  t.equal((await rpj(`${path}/wineol/weird/package.json`))[i], ' \t \t ')
+  t.equal((await rpj(`${path}/wineol/weird/package.json`))[n], '\r\n')
+  t.equal((await rpj(`${path}/doubleSpaced/none/package.json`))[i], '')
+  t.equal((await rpj(`${path}/doubleSpaced/none/package.json`))[n], '')
+  t.equal((await rpj(`${path}/doubleSpaced/twospace/package.json`))[i], '  ')
+  t.equal((await rpj(`${path}/doubleSpaced/twospace/package.json`))[n], '\n\n')
+  t.equal((await rpj(`${path}/doubleSpaced/tab/package.json`))[i], '\t')
+  t.equal((await rpj(`${path}/doubleSpaced/tab/package.json`))[n], '\n\n')
+  t.equal((await rpj(`${path}/doubleSpaced/weird/package.json`))[i], ' \t \t ')
+  t.equal((await rpj(`${path}/doubleSpaced/weird/package.json`))[n], '\n\n')
+  t.equal((await rpj(`${path}/doubleWin/none/package.json`))[i], '')
+  t.equal((await rpj(`${path}/doubleWin/none/package.json`))[n], '')
+  t.equal((await rpj(`${path}/doubleWin/twospace/package.json`))[i], '  ')
+  t.equal((await rpj(`${path}/doubleWin/twospace/package.json`))[n], '\r\n\r\n')
+  t.equal((await rpj(`${path}/doubleWin/tab/package.json`))[i], '\t')
+  t.equal((await rpj(`${path}/doubleWin/tab/package.json`))[n], '\r\n\r\n')
+  t.equal((await rpj(`${path}/doubleWin/weird/package.json`))[i], ' \t \t ')
+  t.equal((await rpj(`${path}/doubleWin/weird/package.json`))[n], '\r\n\r\n')
 })
