@@ -194,8 +194,6 @@ t.test('preserve indentation', async t => {
     },
   })
   const i = Symbol.for('indent')
-  console.error((await rpj(`${path}/none/package.json`)))
-
   t.equal((await rpj(`${path}/none/package.json`))[i], '')
   t.equal((await rpj(`${path}/twospace/package.json`))[i], '  ')
   t.equal((await rpj(`${path}/tab/package.json`))[i], '\t')
