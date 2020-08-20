@@ -165,3 +165,39 @@ t.test('set _id if name and version set', t =>
 t.test('exports the normalize function', async t =>
   t.same(rpj.normalize({ bundledDependencies: true, dependencies: {a:'1'}}),
     { bundleDependencies: ['a'], dependencies: {a:'1'}}))
+
+t.test('preserve indentation', async t => {
+  const path = t.testdir({
+    none: {
+      'package.json': JSON.stringify({
+        name: 'none',
+        version: '0.0.0',
+      }),
+    },
+    twospace: {
+      'package.json': JSON.stringify({
+        name: 'twospace',
+        version: '2.2.2',
+      }, null, 2),
+    },
+    tab: {
+      'package.json': JSON.stringify({
+        name: 'tab',
+        version: '8.8.8',
+      }, null, '\t'),
+    },
+    weird: {
+      'package.json': JSON.stringify({
+        name: 'weird',
+        version: '1.2.3',
+      }, null, ' \t \t '),
+    },
+  })
+  const i = Symbol.for('indent')
+  console.error((await rpj(`${path}/none/package.json`)))
+
+  t.equal((await rpj(`${path}/none/package.json`))[i], '')
+  t.equal((await rpj(`${path}/twospace/package.json`))[i], '  ')
+  t.equal((await rpj(`${path}/tab/package.json`))[i], '\t')
+  t.equal((await rpj(`${path}/weird/package.json`))[i], ' \t \t ')
+})

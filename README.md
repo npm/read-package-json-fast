@@ -27,6 +27,26 @@ so they'll be of type `JSONParseError` and have a `code: 'EJSONPARSE'`
 property.  Errors will also always have a `path` member referring to the
 path originally passed into the function.
 
+## Indentation
+
+To preserve indentation when the file is saved back to disk, use
+`data[Symbol.for('indent')]` as the third argument to `JSON.stringify`.
+
+For example:
+
+```js
+const data = await readPackageJsonFast('./package.json')
+const indent = Symbol.for('indent')
+// .. do some stuff to the data ..
+const string = JSON.stringify(data, null, data[indent]) + '\n'
+await writeFile('./package.json', string)
+```
+
+Indentation is determined by looking at the whitespace between the initial
+`{` and the first `"` that follows it.  If you have lots of weird
+inconsistent indentation, then it won't track that or give you any way to
+preserve it.
+
 ## WHAT THIS MODULE DOES
 
 - Parse JSON

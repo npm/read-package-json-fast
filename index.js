@@ -2,8 +2,18 @@ const {promisify} = require('util')
 const fs = require('fs')
 const readFile = promisify(fs.readFile)
 const parse = require('json-parse-even-better-errors')
+const _indent = Symbol.for('indent')
 const rpj = path => readFile(path, 'utf8')
-  .then(data => normalize(parse(data)))
+  .then(data => {
+    // get the indentation so that we can save it back nicely
+    // if the file starts with {" then we have an indent of '', ie, none
+    // otherwise, pick the indentation of the next line after the first \n
+    // JSON.stringify ignores symbols, so this is reasonably safe.
+    const indent = data.match(/^\{\n?([\s\t]*)"/)
+    const result = normalize(parse(data))
+    result[_indent] = indent[1]
+    return result
+  })
   .catch(er => {
     er.path = path
     throw er
