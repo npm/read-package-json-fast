@@ -120,7 +120,7 @@ t.test('cleanup bins', async t => {
     }) + '/package.json'), { bin: {x:'y', y: undefined, z: undefined }}))
 })
 
-t.test('fold in optional deps to regular deps', async t => {
+t.test('dedupe optional deps out of regular deps', async t => {
   t.test('choose optional deps in conflict', t =>
     t.resolveMatch(rpj(t.testdir({
       'package.json': JSON.stringify({
@@ -135,12 +135,9 @@ t.test('fold in optional deps to regular deps', async t => {
       optionalDependencies: {
         whowins: '1.2.3-optional'
       },
-      dependencies: {
-        whowins: '1.2.3-optional'
-      }
     }))
 
-  t.test('create regular deps if only optional specified', t =>
+  t.test('do not create regular deps if only optional specified', t =>
     t.resolveMatch(rpj(t.testdir({
       'package.json': JSON.stringify({
         optionalDependencies: {
@@ -151,9 +148,6 @@ t.test('fold in optional deps to regular deps', async t => {
       optionalDependencies: {
         whowins: '1.2.3-optional'
       },
-      dependencies: {
-        whowins: '1.2.3-optional'
-      }
     }))
 })
 
