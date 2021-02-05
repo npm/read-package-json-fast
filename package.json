@@ -11,6 +11,9 @@
     "postversion": "npm publish",
     "postpublish": "git push origin --follow-tags"
   },
+  "engines": {
+    "node": ">=10"
+  },
   "tap": {
     "check-coverage": true
   },
