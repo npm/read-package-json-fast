@@ -256,3 +256,20 @@ t.test('preserve indentation', async t => {
   t.equal((await rpj(`${path}/doubleWin/weird/package.json`))[i], ' \t \t ')
   t.equal((await rpj(`${path}/doubleWin/weird/package.json`))[n], '\r\n\r\n')
 })
+
+t.test('strip _fields', async t => {
+  const path = t.testdir({
+    'package.json': JSON.stringify({
+      name: 'underscore',
+      version: '1.2.3',
+      _lodash: true,
+    }),
+  })
+  t.strictSame(await rpj(`${path}/package.json`), {
+    // add _id, this is the only one allowed
+    _id: 'underscore@1.2.3',
+    name: 'underscore',
+    version: '1.2.3',
+    // no _lodash
+  })
+})
