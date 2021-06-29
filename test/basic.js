@@ -1,4 +1,5 @@
 const t = require('tap')
+
 const rpj = require('../')
 
 t.test('errors for bad/missing data', async t => {
@@ -271,5 +272,70 @@ t.test('strip _fields', async t => {
     name: 'underscore',
     version: '1.2.3',
     // no _lodash
+  })
+})
+
+t.test('load directories.bin', async t => {
+  const { basename } = require('path')
+  const fs = require('fs')
+  const rpj = t.mock('../', {
+    fs: {
+      ...fs,
+      lstat: (p, cb) => {
+        if (basename(p) === 'staterror')
+          cb(new Error('stat error'))
+        else
+          return fs.lstat(p, cb)
+      },
+      readdir: (p, cb) => {
+        if (basename(p) === 'readdirerror') {
+          cb(new Error('readdir error'))
+        } else
+          return fs.readdir(p, cb)
+      },
+    },
+  })
+  const path = t.testdir({
+    'package.json': JSON.stringify({
+      name: 'foo',
+      version: '1.2.3',
+      directories: {
+        bin: 'bin',
+      },
+    }),
+    bin: {
+      foo: 'foo',
+      bar: 'bar',
+      '.ignorethis': 'should be ignored',
+      linky: t.fixture('symlink', './foo'),
+      subdir: {
+        a: 'a',
+        b: 'b',
+        sub: {
+          suba: 'dub',
+        },
+      },
+      staterror: 'do not stat me please',
+      readdirerror: {
+        do: 'not',
+        read: 'this',
+        dir: 'please',
+      },
+    },
+  })
+  t.strictSame(await rpj(`${path}/package.json`), {
+    name: 'foo',
+    version: '1.2.3',
+    _id: 'foo@1.2.3',
+    directories: {
+      bin: 'bin',
+    },
+    bin: {
+      foo: 'bin/foo',
+      bar: 'bin/bar',
+      a: 'bin/subdir/a',
+      b: 'bin/subdir/b',
+      suba: 'bin/subdir/sub/suba',
+    },
   })
 })
