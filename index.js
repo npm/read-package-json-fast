@@ -10,7 +10,7 @@ const { resolve, dirname, join, relative } = require('path')
 const rpj = path => readFile(path, 'utf8')
   .then(data => readBinDir(path, normalize(stripUnderscores(parse(data)))))
   .catch(er => {
-    er.path = path
+    er.file = path
     throw er
   })
 

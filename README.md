@@ -24,8 +24,8 @@ const normalized = rpj.normalize(packageJsonObject)
 Errors raised from parsing will use
 [`json-parse-even-better-errors`](http://npm.im/json-parse-even-better-errors),
 so they'll be of type `JSONParseError` and have a `code: 'EJSONPARSE'`
-property.  Errors will also always have a `path` member referring to the
-path originally passed into the function.
+property.  Errors will also always have a `file` member referring to the
+file originally passed into the function.
 
 ## Indentation
 
