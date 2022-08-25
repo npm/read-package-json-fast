@@ -46,7 +46,6 @@ t.test('clean up bundleddddddDependencies', async t => {
       }),
     }) + '/package.json'), { bundleDependencies: [] }))
 
-
   t.test('handle bundleDependencies: false', t =>
     t.resolveMatch(rpj(t.testdir({
       'package.json': JSON.stringify({
@@ -77,29 +76,29 @@ t.test('clean up scripts', async t => {
       'package.json': JSON.stringify({
         scripts: {
           foo: 'bar',
-          bar: [ 'baz' ],
+          bar: ['baz'],
           baz: { bar: { foo: 'barbaz' } },
         },
-      })
+      }),
     }) + '/package.json'), {
       scripts: {
         foo: 'bar',
         bar: undefined,
         baz: undefined,
-      }
+      },
     }))
 })
 
 t.test('convert funding string to object', t =>
   t.resolveMatch(rpj(t.testdir({
-    'package.json': JSON.stringify({ funding: 'hello' })
+    'package.json': JSON.stringify({ funding: 'hello' }),
   }) + '/package.json'), { funding: { url: 'hello' } }))
 
 t.test('cleanup bins', async t => {
   t.test('handle string when a name is set', t =>
     t.resolveMatch(rpj(t.testdir({
       'package.json': JSON.stringify({ name: 'x', bin: 'y' }),
-    }) + '/package.json'), { bin: { x: 'y' }}))
+    }) + '/package.json'), { bin: { x: 'y' } }))
 
   t.test('delete string bin when no name', t =>
     t.resolveMatch(rpj(t.testdir({
@@ -117,8 +116,8 @@ t.test('cleanup bins', async t => {
         x: 'y',
         y: 1234,
         z: { a: 'b' },
-      }}),
-    }) + '/package.json'), { bin: {x:'y', y: undefined, z: undefined }}))
+      } }),
+    }) + '/package.json'), { bin: { x: 'y', y: undefined, z: undefined } }))
 })
 
 t.test('dedupe optional deps out of regular deps', async t => {
@@ -126,15 +125,15 @@ t.test('dedupe optional deps out of regular deps', async t => {
     t.resolveMatch(rpj(t.testdir({
       'package.json': JSON.stringify({
         optionalDependencies: {
-          whowins: '1.2.3-optional'
+          whowins: '1.2.3-optional',
         },
         dependencies: {
-          whowins: '1.2.3-prod'
-        }
+          whowins: '1.2.3-prod',
+        },
       }),
     }) + '/package.json'), {
       optionalDependencies: {
-        whowins: '1.2.3-optional'
+        whowins: '1.2.3-optional',
       },
     }))
 
@@ -142,24 +141,24 @@ t.test('dedupe optional deps out of regular deps', async t => {
     t.resolveMatch(rpj(t.testdir({
       'package.json': JSON.stringify({
         optionalDependencies: {
-          whowins: '1.2.3-optional'
+          whowins: '1.2.3-optional',
         },
       }),
     }) + '/package.json'), {
       optionalDependencies: {
-        whowins: '1.2.3-optional'
+        whowins: '1.2.3-optional',
       },
     }))
 })
 
 t.test('set _id if name and version set', t =>
   t.resolveMatch(rpj(t.testdir({
-    'package.json': JSON.stringify({name:'a', version: '1.2.3'}),
+    'package.json': JSON.stringify({ name: 'a', version: '1.2.3' }),
   }) + '/package.json'), { _id: 'a@1.2.3' }))
 
 t.test('exports the normalize function', async t =>
-  t.same(rpj.normalize({ bundledDependencies: true, dependencies: {a:'1'}}),
-    { bundleDependencies: ['a'], dependencies: {a:'1'}}))
+  t.same(rpj.normalize({ bundledDependencies: true, dependencies: { a: '1' } }),
+    { bundleDependencies: ['a'], dependencies: { a: '1' } }))
 
 t.test('preserve indentation', async t => {
   const obj = {
@@ -278,20 +277,22 @@ t.test('strip _fields', async t => {
 t.test('load directories.bin', async t => {
   const { basename } = require('path')
   const fs = require('fs')
-  const rpj = t.mock('../', {
+  const rpjMock = t.mock('../', {
     fs: {
       ...fs,
       lstat: (p, cb) => {
-        if (basename(p) === 'staterror')
+        if (basename(p) === 'staterror') {
           cb(new Error('stat error'))
-        else
+        } else {
           return fs.lstat(p, cb)
+        }
       },
       readdir: (p, cb) => {
         if (basename(p) === 'readdirerror') {
           cb(new Error('readdir error'))
-        } else
+        } else {
           return fs.readdir(p, cb)
+        }
       },
     },
   })
@@ -323,7 +324,7 @@ t.test('load directories.bin', async t => {
       },
     },
   })
-  t.strictSame(await rpj(`${path}/package.json`), {
+  t.strictSame(await rpjMock(`${path}/package.json`), {
     name: 'foo',
     version: '1.2.3',
     _id: 'foo@1.2.3',
