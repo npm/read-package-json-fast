@@ -1,6 +1,11 @@
 const t = require('tap')
+const { basename, join, posix } = require('path')
+const fs = require('fs')
 
 const rpj = require('../')
+
+const joinValues = (obj) =>
+  Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, join(...v.split(posix.sep))]))
 
 t.test('errors for bad/missing data', async t => {
   t.test('raises an error for missing file', t =>
@@ -12,7 +17,7 @@ t.test('errors for bad/missing data', async t => {
     }) + '/package.json'), { code: 'EJSONPARSE' }))
 })
 
-t.test('clean up bundleddddddDependencies', async t => {
+t.test('clean up bundleDependencies', async t => {
   t.test('change name if bundleDependencies is not present', t =>
     t.resolveMatch(rpj(t.testdir({
       'package.json': JSON.stringify({ bundledDependencies: [] }),
@@ -275,8 +280,6 @@ t.test('strip _fields', async t => {
 })
 
 t.test('load directories.bin', async t => {
-  const { basename } = require('path')
-  const fs = require('fs')
   const rpjMock = t.mock('../', {
     fs: {
       ...fs,
@@ -331,12 +334,12 @@ t.test('load directories.bin', async t => {
     directories: {
       bin: 'bin',
     },
-    bin: {
+    bin: joinValues({
       foo: 'bin/foo',
       bar: 'bin/bar',
       a: 'bin/subdir/a',
       b: 'bin/subdir/b',
       suba: 'bin/subdir/sub/suba',
-    },
+    }),
   })
 })
