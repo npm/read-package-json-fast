@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.1](https://github.com/npm/read-package-json-fast/compare/v3.0.0...v3.0.1) (2022-10-17)
+
+### Dependencies
+
+* [`2866ecb`](https://github.com/npm/read-package-json-fast/commit/2866ecbe35332d5a3bd7f92d3c8c35e070f58cba) [#17](https://github.com/npm/read-package-json-fast/pull/17) bump npm-normalize-package-bin from 2.0.0 to 3.0.0
+
 ## [3.0.0](https://github.com/npm/read-package-json-fast/compare/v2.0.3...v3.0.0) (2022-10-10)
 
 ### ⚠️ BREAKING CHANGES

@@ -1,6 +1,6 @@
 {
   "name": "read-package-json-fast",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Like read-package-json, but faster",
   "main": "lib/index.js",
   "author": "GitHub Inc.",
