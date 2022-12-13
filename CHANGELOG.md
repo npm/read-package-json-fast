@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.2](https://github.com/npm/read-package-json-fast/compare/v3.0.1...v3.0.2) (2022-12-13)
+
+### Bug Fixes
+
+* [`28e4e58`](https://github.com/npm/read-package-json-fast/commit/28e4e58a848547b360563eae3606d8bdf0ab5719) use fs/promises (@lukekarrys)
+
 ## [3.0.1](https://github.com/npm/read-package-json-fast/compare/v3.0.0...v3.0.1) (2022-10-17)
 
 ### Dependencies
