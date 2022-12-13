@@ -1,6 +1,6 @@
 const t = require('tap')
 const { basename, join, posix } = require('path')
-const fs = require('fs')
+const fs = require('fs/promises')
 
 const rpj = require('../')
 
@@ -281,20 +281,20 @@ t.test('strip _fields', async t => {
 
 t.test('load directories.bin', async t => {
   const rpjMock = t.mock('../', {
-    fs: {
+    'fs/promises': {
       ...fs,
-      lstat: (p, cb) => {
+      lstat: async (p) => {
         if (basename(p) === 'staterror') {
-          cb(new Error('stat error'))
+          throw new Error('stat error')
         } else {
-          return fs.lstat(p, cb)
+          return fs.lstat(p)
         }
       },
-      readdir: (p, cb) => {
+      readdir: async (p) => {
         if (basename(p) === 'readdirerror') {
-          cb(new Error('readdir error'))
+          throw new Error('readdir error')
         } else {
-          return fs.readdir(p, cb)
+          return fs.readdir(p)
         }
       },
     },
