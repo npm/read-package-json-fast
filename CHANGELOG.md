@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.3](https://github.com/npm/read-package-json-fast/compare/v3.0.2...v3.0.3) (2024-04-21)
+
+### Chores
+
+* [`4587a8d`](https://github.com/npm/read-package-json-fast/commit/4587a8d989bf054bc90e2fdc7c19b177411fc7f5) [#62](https://github.com/npm/read-package-json-fast/pull/62) postinstall for dependabot template-oss PR (@lukekarrys)
+* [`5049cd6`](https://github.com/npm/read-package-json-fast/commit/5049cd63847e5f1ca5a32c3b00c8ddda8e7c1b98) [#62](https://github.com/npm/read-package-json-fast/pull/62) bump @npmcli/template-oss from 4.21.3 to 4.21.4 (@dependabot[bot])
+
 ## [3.0.2](https://github.com/npm/read-package-json-fast/compare/v3.0.1...v3.0.2) (2022-12-13)
 
 ### Bug Fixes
