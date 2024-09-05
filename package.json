@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "json-parse-even-better-errors": "^3.0.0",
-    "npm-normalize-package-bin": "^3.0.0"
+    "npm-normalize-package-bin": "^4.0.0"
   },
   "repository": {
     "type": "git",
