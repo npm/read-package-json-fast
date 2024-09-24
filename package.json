@@ -16,7 +16,7 @@
     "eslint": "eslint \"**/*.{js,cjs,ts,mjs,jsx,tsx}\""
   },
   "engines": {
-    "node": "^14.17.0 || ^16.13.0 || >=18.0.0"
+    "node": "^18.17.0 || >=20.5.0"
   },
   "devDependencies": {
     "@npmcli/eslint-config": "^5.0.0",
