@@ -1,5 +1,21 @@
 # Changelog
 
+## [4.0.0](https://github.com/npm/read-package-json-fast/compare/v3.0.2...v4.0.0) (2024-09-24)
+### ⚠️ BREAKING CHANGES
+* `read-package-json-fast` now supports node `^18.17.0 || >=20.5.0`
+### Bug Fixes
+* [`a650021`](https://github.com/npm/read-package-json-fast/commit/a650021a95d535305c90ed8ce37c57217cd65de3) [#79](https://github.com/npm/read-package-json-fast/pull/79) align to npm 10 node engine range (@hashtagchris)
+### Dependencies
+* [`e603259`](https://github.com/npm/read-package-json-fast/commit/e603259df9a05155878a5cf865d7d1a5cab3504d) [#79](https://github.com/npm/read-package-json-fast/pull/79) `npm-normalize-package-bin@4.0.0`
+* [`482ad0e`](https://github.com/npm/read-package-json-fast/commit/482ad0eb93685e82408f0e4fdbb9eeb8ac4063e0) [#79](https://github.com/npm/read-package-json-fast/pull/79) `json-parse-even-better-errors@4.0.0`
+### Chores
+* [`2e7214c`](https://github.com/npm/read-package-json-fast/commit/2e7214ce3f33765e9559dea0afa7e18fe4717bfd) [#79](https://github.com/npm/read-package-json-fast/pull/79) run template-oss-apply (@hashtagchris)
+* [`8c7c240`](https://github.com/npm/read-package-json-fast/commit/8c7c240a9642bc2fe0afc1392e7b32c22263e941) [#78](https://github.com/npm/read-package-json-fast/pull/78) enable auto publish (#78) (@reggi)
+* [`bc76038`](https://github.com/npm/read-package-json-fast/commit/bc76038b11ce0f5888923ac56b9a94bd9dc2f5b0) [#74](https://github.com/npm/read-package-json-fast/pull/74) bump @npmcli/eslint-config from 4.0.5 to 5.0.0 (@dependabot[bot])
+* [`bd2015f`](https://github.com/npm/read-package-json-fast/commit/bd2015f2aa7d93c2a528405796f9543293d10370) [#63](https://github.com/npm/read-package-json-fast/pull/63) bump @npmcli/template-oss to 4.22.0 (@lukekarrys)
+* [`0380e43`](https://github.com/npm/read-package-json-fast/commit/0380e4399748287a6af06ec79512de48e1a1615b) [#75](https://github.com/npm/read-package-json-fast/pull/75) postinstall for dependabot template-oss PR (@hashtagchris)
+* [`eb9cd4f`](https://github.com/npm/read-package-json-fast/commit/eb9cd4f9c766a116bf353ce5dbe3eda7f5231558) [#75](https://github.com/npm/read-package-json-fast/pull/75) bump @npmcli/template-oss from 4.23.1 to 4.23.3 (@dependabot[bot])
+
 ## [3.0.2](https://github.com/npm/read-package-json-fast/compare/v3.0.1...v3.0.2) (2022-12-13)
 
 ### Bug Fixes
