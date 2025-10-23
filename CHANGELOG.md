@@ -1,5 +1,18 @@
 # Changelog
 
+## [5.0.0](https://github.com/npm/read-package-json-fast/compare/v4.0.0...v5.0.0) (2025-10-23)
+### ⚠️ BREAKING CHANGES
+* `read-package-json-fast` now supports node `^20.17.0 || >=22.9.0`
+### Bug Fixes
+* [`8b34e07`](https://github.com/npm/read-package-json-fast/commit/8b34e07cc29cb64e7ba811f6268e21979fde8f67) [#90](https://github.com/npm/read-package-json-fast/pull/90) align to npm 11 node engine range (@owlstronaut)
+### Dependencies
+* [`eabe2f9`](https://github.com/npm/read-package-json-fast/commit/eabe2f9dc6f369f55f527e77ac6aff3c65e9cebd) [#90](https://github.com/npm/read-package-json-fast/pull/90) `npm-normalize-package-bin@5.0.0`
+* [`6604da4`](https://github.com/npm/read-package-json-fast/commit/6604da4d4a3131a5dd989c846d03eec3dd20176d) [#90](https://github.com/npm/read-package-json-fast/pull/90) `json-parse-even-better-errors@5.0.0`
+### Chores
+* [`3a6af30`](https://github.com/npm/read-package-json-fast/commit/3a6af30cd6161ada57bb61a916b82ba0f10c2504) [#90](https://github.com/npm/read-package-json-fast/pull/90) template-oss-apply (@owlstronaut)
+* [`a1db7fe`](https://github.com/npm/read-package-json-fast/commit/a1db7fed35e4d027646616e71391fc9a2f03cc9d) [#83](https://github.com/npm/read-package-json-fast/pull/83) postinstall workflow updates (#83) (@owlstronaut)
+* [`eed175d`](https://github.com/npm/read-package-json-fast/commit/eed175d0d20b2a7b82583a925c2318ce936b4e08) [#88](https://github.com/npm/read-package-json-fast/pull/88) bump @npmcli/template-oss from 4.26.0 to 4.27.1 (#88) (@dependabot[bot], @npm-cli-bot)
+
 ## [4.0.0](https://github.com/npm/read-package-json-fast/compare/v3.0.2...v4.0.0) (2024-09-24)
 ### ⚠️ BREAKING CHANGES
 * `read-package-json-fast` now supports node `^18.17.0 || >=20.5.0`
