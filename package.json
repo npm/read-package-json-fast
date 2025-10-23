@@ -24,7 +24,7 @@
     "tap": "^16.3.0"
   },
   "dependencies": {
-    "json-parse-even-better-errors": "^4.0.0",
+    "json-parse-even-better-errors": "^5.0.0",
     "npm-normalize-package-bin": "^4.0.0"
   },
   "repository": {
