@@ -1,5 +1,22 @@
 # Changelog
 
+## [6.0.0](https://github.com/npm/read-package-json-fast/compare/v5.0.0...v6.0.0) (2026-05-15)
+### ⚠️ BREAKING CHANGES
+* `read-package-json-fast` now supports node `^22.22.2 || ^24.15.0 || >=26.0.0`
+* template-oss-apply
+### Features
+* [`7b79f97`](https://github.com/npm/read-package-json-fast/commit/7b79f977db91249c3d498fd30a4b239e5d62a6ba) [#104](https://github.com/npm/read-package-json-fast/pull/104) bump to new node engine range (@owlstronaut)
+* [`b3bbcb4`](https://github.com/npm/read-package-json-fast/commit/b3bbcb4f777f85c552d834cd25233f47448553cb) [#104](https://github.com/npm/read-package-json-fast/pull/104) template-oss-apply (@owlstronaut)
+### Dependencies
+* [`9b72909`](https://github.com/npm/read-package-json-fast/commit/9b729099f443ad2675f938ec0e790af49e29dd20) [#104](https://github.com/npm/read-package-json-fast/pull/104) `npm-normalize-package-bin@6.0.0`
+* [`00c5122`](https://github.com/npm/read-package-json-fast/commit/00c51227e71992b12c0708d82e319698d84146c0) [#104](https://github.com/npm/read-package-json-fast/pull/104) `json-parse-even-better-errors@6.0.0`
+### Chores
+* [`9a06ff1`](https://github.com/npm/read-package-json-fast/commit/9a06ff1a1aca49328e367c0aba4434a51e2f7772) [#104](https://github.com/npm/read-package-json-fast/pull/104) run lintfix (@owlstronaut)
+* [`0256c1a`](https://github.com/npm/read-package-json-fast/commit/0256c1ad1d01fda956aae3a6c40348f5646461b3) [#104](https://github.com/npm/read-package-json-fast/pull/104) template-oss-apply (@owlstronaut)
+* [`a90d3fd`](https://github.com/npm/read-package-json-fast/commit/a90d3fd447bec506c22956abbc900ce07c50a96d) [#104](https://github.com/npm/read-package-json-fast/pull/104) bumping @npmcli/template-oss from 4.30.0 to 5.1.0 (@owlstronaut)
+* [`e496a4a`](https://github.com/npm/read-package-json-fast/commit/e496a4a233e514f341fd1a6b475e1922865e16c6) [#94](https://github.com/npm/read-package-json-fast/pull/94) bump @npmcli/eslint-config from 5.1.0 to 6.0.0 (#94) (@dependabot[bot])
+* [`05213cc`](https://github.com/npm/read-package-json-fast/commit/05213cc6833c7746b8d70dee82245c2a58648dc5) [#99](https://github.com/npm/read-package-json-fast/pull/99) bump @npmcli/template-oss from 4.29.0 to 4.30.0 (#99) (@dependabot[bot], @npm-cli-bot)
+
 ## [5.0.0](https://github.com/npm/read-package-json-fast/compare/v4.0.0...v5.0.0) (2025-10-23)
 ### ⚠️ BREAKING CHANGES
 * `read-package-json-fast` now supports node `^20.17.0 || >=22.9.0`
